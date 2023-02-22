@@ -9,7 +9,7 @@ temperature = 0.8
 max_tokens = 50
 
 # Define the question you want to ask the model
-question = "Τι υπεγράφη στις Κάννες?"
+question = "Ποιός είναι ο σκοπός της Συμφωνίας?"
 
 # Generate a response from the model
 response = openai.Completion.create(

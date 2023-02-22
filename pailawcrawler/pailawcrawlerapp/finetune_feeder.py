@@ -14,7 +14,7 @@ reader = PdfReader('examples_folder/f2.pdf')
 text = ''
 for i in range(len(reader.pages)):
     page = reader.pages[i]
-    text += page.extract_text()
+    text = page.extract_text()
     response = openai.Completion.create(
         engine=model_engine,
         prompt=text,

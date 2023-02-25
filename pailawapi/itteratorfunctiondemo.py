@@ -43,7 +43,7 @@ def itteratefiles():
             else:
                 year+=1
                 category=1
-                counter=0       
+                counter=1          
                 if year > current_year:
                     calculate = False
         

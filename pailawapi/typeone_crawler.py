@@ -3,7 +3,6 @@ from io import BytesIO
 from pdfminer.high_level import extract_text
 import datetime
 import pytz
-import re
 
 timezone = pytz.timezone('Europe/Athens')
 current_time = datetime.datetime.now(timezone)
@@ -13,7 +12,7 @@ class CounterClass:
     def __init__(self):
         self.year = 2023
         self.category = 1
-        self.counter = 43
+        self.counter = 1
 
 obj = CounterClass()
 
@@ -40,7 +39,7 @@ def itteratefiles():
                 emptyitterations = 0
                 increment(obj)
         else:
-            print('error other '+ response.status_code)        
+            print('error other '+ response.status_code)
         calculate = increment(obj)
         # print(f'{obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
 

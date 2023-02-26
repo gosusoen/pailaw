@@ -22,28 +22,23 @@ def itteratefiles():
     text=""
 
     while calculate:
-        # url = f'https://www.et.gr/api/DownloadFeksApi/?fek_pdf={year}{calculatestring(category, 2)}{calculatestring(counter, 5)}'
-        # response = requests.get(url)
-        # if response.status_code == 200:
-        #     with BytesIO(response.content) as f:
-        #         text = extract_text(f)
-        #         print(f'success {year}{calculatestring(category, 2)}{calculatestring(counter, 5)}')
-        # elif response.status_code == 500:
-        #     print('error 500 '+response.status_code)
-        #     # for every N empty api calls, we change category
-        emptyitterations+=1
-        if(emptyitterations > 4):
-            emptyitterations = 0
-            increment(obj)
-
-
-
-        # else:
-        #    print('error other '+response.status_code)
-
-        
+        url = f'https://www.et.gr/api/DownloadFeksApi/?fek_pdf={obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}'
+        response = requests.get(url)
+        if response.status_code == 200:
+            with BytesIO(response.content) as f:
+                text = extract_text(f)
+                print(f'success {obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
+        elif response.status_code == 500:
+            print('error 500 '+ response.status_code)
+            # for every N empty api calls, we change category
+            emptyitterations+=1
+            if(emptyitterations > 4):
+                emptyitterations = 0
+                increment(obj)
+        else:
+            print('error other '+ response.status_code)        
         calculate = increment(obj)
-        print(f'{obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
+        # print(f'{obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
         
 def increment(obj):
     result = True

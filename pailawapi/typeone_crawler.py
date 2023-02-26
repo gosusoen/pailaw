@@ -3,6 +3,7 @@ from io import BytesIO
 from pdfminer.high_level import extract_text
 import datetime
 import pytz
+import re
 
 timezone = pytz.timezone('Europe/Athens')
 current_time = datetime.datetime.now(timezone)
@@ -12,7 +13,7 @@ class CounterClass:
     def __init__(self):
         self.year = 2023
         self.category = 1
-        self.counter = 1
+        self.counter = 43
 
 obj = CounterClass()
 
@@ -27,7 +28,10 @@ def itteratefiles():
         if response.status_code == 200:
             with BytesIO(response.content) as f:
                 text = extract_text(f)
-                print(f'success {obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
+                text = text.replace("\n", " ")
+                text = text.replace("- ", "")
+                # print(f'success {obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
+                print(text)
         elif response.status_code == 500:
             print('error 500 '+ response.status_code)
             # for every N empty api calls, we change category
@@ -39,7 +43,7 @@ def itteratefiles():
             print('error other '+ response.status_code)        
         calculate = increment(obj)
         # print(f'{obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}\n')
-        
+
 def increment(obj):
     result = True
     if obj.counter < 99:
@@ -55,8 +59,6 @@ def increment(obj):
             if obj.year > current_year:
                 result = False
     return result
-
-
 
 
 def calculatestring(number, maxdigits):

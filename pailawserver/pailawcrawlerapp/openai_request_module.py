@@ -12,7 +12,7 @@ class CounterClass:
     def __init__(self):
         self.year = 2023
         self.category = 1
-        self.counter = 1
+        self.counter = 24
 
 obj = CounterClass()
 
@@ -24,6 +24,7 @@ def itteratefiles():
     while calculate:
         url = f'https://www.et.gr/api/DownloadFeksApi/?fek_pdf={obj.year}{calculatestring(obj.category, 2)}{calculatestring(obj.counter, 5)}'
         response = requests.get(url)
+        response.encoding = 'utf-8'
         if response.status_code == 200:
             with BytesIO(response.content) as f:
                 text = extract_text(f)

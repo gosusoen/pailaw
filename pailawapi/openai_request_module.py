@@ -18,7 +18,7 @@ for i in range(len(reader.pages)):
     print(i)
     response = openai.Completion.create(
         engine=model_engine,
-        prompt=text,
+        prompt="Θέλω να μου απαντήσεις" + text,
         max_tokens=max_tokens,
         temperature=temperature,
         n=1,
